@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<video id="lecture" width="950" controls>
+		<source src="{% static '15_HS840_03-03-2022_lecture.mp4' %}" type="video/mp4">
+		</video>
+
+		<div style="width: 950px; border: 2px solid black">
+			{% for s in st %}
+			<button onclick="setCurTime('{{s.timestamp}}')" type="button" style="border: none;">{{s.line}} [{{s.timestamp}}]</button><br>
+			{% endfor %}
+		</div>
+
+		<script type="text/javascript">
+			var vid = document.getElementById("lecture");
+			function setCurTime(x) {
+				console.log(x);
+				[minutes, seconds] = x.split(':');
+				[seconds, miliseconds] = seconds.split('.');
+				sec = (+minutes) * 60 + (+seconds) + (+miliseconds) * 0.001;
+  				vid.currentTime = sec;
+  				console.log(sec);
+  				console.log(vid.currentTime);
+			}
+		</script>
+
+</body>
+</html>
